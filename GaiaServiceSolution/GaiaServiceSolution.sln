@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PluginFramework", "PluginFramework", "{21105F9B-1A17-44FF-92D4-5D3FD2E7D0D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginCore", "PluginCore\PluginCore.csproj", "{D6A58963-F72D-4E17-BC0B-241CC2923FB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PluginContainer", "PluginContainer", "{A1EA003D-E70A-4F72-9CE7-E7671D112011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePluginLoader", "ConsolePluginLoader\ConsolePluginLoader.csproj", "{1AA07FAD-83B1-4419-A12D-4A7922093FB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginManager", "PluginManager\PluginManager.csproj", "{24C94927-010A-4DD8-9C45-7DAAC02AB2AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaiaService", "GaiaService\GaiaService.csproj", "{BD596F54-042F-4E11-97D1-4A52359D8256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginContainer", "PluginContainer\PluginContainer.csproj", "{22E09AA2-B9F4-48AB-86C3-342BDC735C78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoPlugin", "DemoPlugin\DemoPlugin.csproj", "{2D94BD68-A6BC-4EB0-8141-0177F2852631}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6A58963-F72D-4E17-BC0B-241CC2923FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A58963-F72D-4E17-BC0B-241CC2923FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A58963-F72D-4E17-BC0B-241CC2923FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A58963-F72D-4E17-BC0B-241CC2923FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA07FAD-83B1-4419-A12D-4A7922093FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA07FAD-83B1-4419-A12D-4A7922093FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA07FAD-83B1-4419-A12D-4A7922093FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA07FAD-83B1-4419-A12D-4A7922093FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C94927-010A-4DD8-9C45-7DAAC02AB2AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C94927-010A-4DD8-9C45-7DAAC02AB2AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C94927-010A-4DD8-9C45-7DAAC02AB2AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C94927-010A-4DD8-9C45-7DAAC02AB2AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD596F54-042F-4E11-97D1-4A52359D8256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD596F54-042F-4E11-97D1-4A52359D8256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD596F54-042F-4E11-97D1-4A52359D8256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD596F54-042F-4E11-97D1-4A52359D8256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E09AA2-B9F4-48AB-86C3-342BDC735C78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E09AA2-B9F4-48AB-86C3-342BDC735C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E09AA2-B9F4-48AB-86C3-342BDC735C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E09AA2-B9F4-48AB-86C3-342BDC735C78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D94BD68-A6BC-4EB0-8141-0177F2852631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D94BD68-A6BC-4EB0-8141-0177F2852631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D94BD68-A6BC-4EB0-8141-0177F2852631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D94BD68-A6BC-4EB0-8141-0177F2852631}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D6A58963-F72D-4E17-BC0B-241CC2923FB4} = {21105F9B-1A17-44FF-92D4-5D3FD2E7D0D5}
+		{A1EA003D-E70A-4F72-9CE7-E7671D112011} = {21105F9B-1A17-44FF-92D4-5D3FD2E7D0D5}
+		{24C94927-010A-4DD8-9C45-7DAAC02AB2AE} = {21105F9B-1A17-44FF-92D4-5D3FD2E7D0D5}
+		{1AA07FAD-83B1-4419-A12D-4A7922093FB4} = {A1EA003D-E70A-4F72-9CE7-E7671D112011}
+		{22E09AA2-B9F4-48AB-86C3-342BDC735C78} = {A1EA003D-E70A-4F72-9CE7-E7671D112011}
+	EndGlobalSection
+EndGlobal
