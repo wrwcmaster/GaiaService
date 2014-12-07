@@ -15,7 +15,7 @@ namespace ConsolePluginLoader
         {
             if (args.Length > 0)
             {
-                string pluginAssembily = args[0];
+                string pluginAssembily =  args.Last();
 
                 if (!string.IsNullOrEmpty(pluginAssembily) && File.Exists(pluginAssembily))
                 {

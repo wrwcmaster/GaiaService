@@ -10,6 +10,13 @@ using System.Threading.Tasks;
 
 namespace GaiaService
 {
+    enum Platform
+    {
+        Windows,
+        Linux,
+        Mac
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -68,8 +75,36 @@ namespace GaiaService
         {
             if (!String.IsNullOrEmpty(pluginAssembly) && File.Exists(pluginAssembly))
             {
-                ProcessStartInfo psi = new ProcessStartInfo("ConsolePluginLoader.exe", "\"" + pluginAssembly + "\"") { UseShellExecute = false };
+                ProcessStartInfo psi = null;
+                if(RunningPlatform() == Platform.Linux){
+                    psi = new ProcessStartInfo("mono", "ConsolePluginLoader.exe \"" + pluginAssembly + "\"") { UseShellExecute = false };
+                }else{
+                    psi = new ProcessStartInfo("ConsolePluginLoader.exe", "\"" + pluginAssembly + "\"") { UseShellExecute = false };
+                }
                 Process.Start(psi);
+            }
+        }
+
+        static Platform RunningPlatform()
+        {
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.Unix:
+                    // Well, there are chances MacOSX is reported as Unix instead of MacOSX.
+                    // Instead of platform check, we'll do a feature checks (Mac specific root folders)
+                    if (Directory.Exists("/Applications")
+                        & Directory.Exists("/System")
+                        & Directory.Exists("/Users")
+                        & Directory.Exists("/Volumes"))
+                        return Platform.Mac;
+                    else
+                        return Platform.Linux;
+
+                case PlatformID.MacOSX:
+                    return Platform.Mac;
+
+                default:
+                    return Platform.Windows;
             }
         }
     }
