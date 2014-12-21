@@ -11,7 +11,7 @@ namespace DemoPlugin
     {
         public void Initiate()
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello world!");
         }
     }
 }

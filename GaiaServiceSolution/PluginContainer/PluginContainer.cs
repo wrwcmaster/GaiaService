@@ -43,8 +43,6 @@ namespace PluginContainer
         public void LoadPlugin(string pluginAssembily)
         {
             //_managerService = ChannelFactory<IPluginManagerService>.CreateChannel(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:8001"));
-            DuplexChannelFactory<IPluginManagerService> channelFactory = new DuplexChannelFactory<IPluginManagerService>(new InstanceContext(this), new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:8001"));
-            _managerService = channelFactory.CreateChannel();
             //_managerService = new PluginManagerProxy(this, new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:8001"));
             string fileName = Path.GetFullPath(pluginAssembily);
             Assembly asm = Assembly.LoadFile(fileName);
@@ -62,10 +60,19 @@ namespace PluginContainer
                             InitiatePlugin(plugin);
                         }
                     }
+                    try
+                    {
+                        DuplexChannelFactory<IPluginManagerService> channelFactory = new DuplexChannelFactory<IPluginManagerService>(new InstanceContext(this), new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:8001"));
+                        _managerService = channelFactory.CreateChannel();
 
-                    //Register Plugin
-                    PluginInfo info = new PluginInfo() { Name = fileName };
-                    _managerService.Register(info);
+                        //Register Plugin
+                        PluginInfo info = new PluginInfo() { Name = fileName };
+                        _managerService.Register(info);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Failed to register on manager service: " + ex.Message);
+                    }
                 }
             }
         }
