@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 
 namespace DmhySourceParser
 {
-    public class DmhySourceParser : IPlugin
+    public class PluginInterface : IPlugin
     {
         public void Initiate()
         {
             WebServiceHost host = new WebServiceHost(typeof(Service), new Uri("http://localhost:8801/"));
             host.Open();
+            RawResourceProvider.SyncDmhyResource();
         }
+        
     }
 }
