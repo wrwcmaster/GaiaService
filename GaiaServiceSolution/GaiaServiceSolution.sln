@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoPlugin", "DemoPlugin\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DmhySourceParser", "DmhySourceParser\DmhySourceParser.csproj", "{FB72BDAC-9D80-4B7B-8565-0AF2AB7BB2D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaiduOfflineDownloader", "BaiduOfflineDownloader\BaiduOfflineDownloader.csproj", "{07FF8456-37CE-4EA4-8CF8-E6085C0334DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{FB72BDAC-9D80-4B7B-8565-0AF2AB7BB2D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB72BDAC-9D80-4B7B-8565-0AF2AB7BB2D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB72BDAC-9D80-4B7B-8565-0AF2AB7BB2D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07FF8456-37CE-4EA4-8CF8-E6085C0334DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07FF8456-37CE-4EA4-8CF8-E6085C0334DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07FF8456-37CE-4EA4-8CF8-E6085C0334DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07FF8456-37CE-4EA4-8CF8-E6085C0334DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
