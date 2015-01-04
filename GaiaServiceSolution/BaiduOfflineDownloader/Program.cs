@@ -13,7 +13,7 @@ namespace BaiduOfflineDownloader
     {
         static void Main(string[] args)
         {
-            string bduss = "puSXNiajc2NXhwQ3d3dWNkVThXNHpyaUFaeUpncFRuRHI2R0Y3NDR3SzNIYzlVQVFBQUFBJCQAAAAAAAAAAAEAAABt3bUGd3J3Y21hc3RlcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALeQp1S3kKdUb3";
+            string bduss = ""
             BaiduPanAgent agent = new BaiduPanAgent(bduss);
             agent.RefreshToken();
             Console.WriteLine(agent.BDSToken);
