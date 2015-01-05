@@ -1,5 +1,8 @@
 ﻿using BaiduOfflineDownloader.Agent.ServiceDefinition;
 using BaiduOfflineDownloader.WCF;
+using Gaia.CommonLib.Net.Http;
+using Gaia.CommonLib.Net.Http.RequestModifier;
+using Gaia.CommonLib.Net.Http.ResponseParser;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,13 +50,24 @@ namespace BaiduOfflineDownloader.Agent
 
         public PCSUploadResponse UploadFile(FileStream stream)
         {
-            WebChannelFactory<IPCSService> channelFactory = new WebChannelFactory<IPCSService>(new Uri("https://c.pcs.baidu.com"));
-            channelFactory.Endpoint.EndpointBehaviors.Add(new CookieBehavior("BDUSS=" + BDUSS));
-            ((WebHttpBinding)channelFactory.Endpoint.Binding).ContentTypeMapper = new JsonContentTypeMapper();
+            PCSUploadResponse result = HttpHelper.SendRequest(new Uri("https://c.pcs.baidu.com/rest/2.0/pcs/file?method=upload&type=tmpfile&app_id=250528"), 
+                HttpMethod.POST, 
+                new List<IHttpRequestModifier>(){
+                    new HttpRequestSingleHeaderModifier("Cookie", "BDUSS=" + BDUSS),
+                    new HttpRequestMultipartFormModifier(null, new List<KeyValuePair<string, HttpRequestMultipartFormModifier.FileInfo>>(){
+                        new KeyValuePair<string, HttpRequestMultipartFormModifier.FileInfo>("Filedata", new HttpRequestMultipartFormModifier.FileInfo(stream))
+                    })
+                },
+                new HttpResponseJSONObjectParser<PCSUploadResponse>(),
+                null);
+            return result;
+            //WebChannelFactory<IPCSService> channelFactory = new WebChannelFactory<IPCSService>(new Uri("https://c.pcs.baidu.com"));
+            //channelFactory.Endpoint.EndpointBehaviors.Add(new CookieBehavior("BDUSS=" + BDUSS));
+            //((WebHttpBinding)channelFactory.Endpoint.Binding).ContentTypeMapper = new JsonContentTypeMapper();
             
-            IPCSService service = channelFactory.CreateChannel();
-            PCSUploadResponse rtn = service.UploadFile(stream);
-            return rtn;
+            //IPCSService service = channelFactory.CreateChannel();
+            //PCSUploadResponse rtn = service.UploadFile(stream);
+            //return rtn;
         }
 
         public PanCreateResponse CreateFile(string path, long size, string md5)

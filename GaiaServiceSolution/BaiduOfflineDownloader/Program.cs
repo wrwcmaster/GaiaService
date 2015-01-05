@@ -13,16 +13,16 @@ namespace BaiduOfflineDownloader
     {
         static void Main(string[] args)
         {
-            string bduss = ""
+            string bduss = "";
             BaiduPanAgent agent = new BaiduPanAgent(bduss);
             agent.RefreshToken();
             Console.WriteLine(agent.BDSToken);
-            var fs = new System.IO.FileStream("/home/scottwu/AlphaDiscLog.txt", System.IO.FileMode.Open);
+            var fs = new System.IO.FileStream("C:\\AlphaDiscLog.txt", System.IO.FileMode.Open);
             long size = fs.Length;
             var uploadResponse = agent.UploadFile(fs);
-            Console.WriteLine(uploadResponse.MD5);
-            var createResponse = agent.CreateFile("/AlphaDiscLog.txt", size, uploadResponse.MD5);
-            Console.WriteLine(createResponse.Path);
+            //Console.WriteLine(uploadResponse.MD5);
+            //var createResponse = agent.CreateFile("/AlphaDiscLog.txt", size, uploadResponse.MD5);
+            //Console.WriteLine(createResponse.Path);
         }
     }
 }
