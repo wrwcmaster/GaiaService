@@ -1,5 +1,6 @@
 ﻿using BaiduOfflineDownloader.Agent.ServiceDefinition;
 using BaiduOfflineDownloader.WCF;
+using Gaia.CommonLib;
 using Gaia.CommonLib.Net.Http;
 using Gaia.CommonLib.Net.Http.RequestModifier;
 using Gaia.CommonLib.Net.Http.ResponseParser;
@@ -53,61 +54,35 @@ namespace BaiduOfflineDownloader.Agent
             PCSUploadResponse result = HttpHelper.SendRequest(new Uri("https://c.pcs.baidu.com/rest/2.0/pcs/file?method=upload&type=tmpfile&app_id=250528"), 
                 HttpMethod.POST, 
                 new List<IHttpRequestModifier>(){
-                    new HttpRequestSingleHeaderModifier("Cookie", "BDUSS=" + BDUSS),
-                    new HttpRequestMultipartFormModifier(null, new List<KeyValuePair<string, HttpRequestMultipartFormModifier.FileInfo>>(){
-                        new KeyValuePair<string, HttpRequestMultipartFormModifier.FileInfo>("Filedata", new HttpRequestMultipartFormModifier.FileInfo(stream))
+                    new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS),
+                    new HttpRequestMultipartFormModifier(null, new KeyValuePairList<string, HttpRequestMultipartFormModifier.FileInfo>(){
+                        { "Filedata", new HttpRequestMultipartFormModifier.FileInfo(stream) }
                     })
                 },
                 new HttpResponseJSONObjectParser<PCSUploadResponse>(),
                 null);
             return result;
-            //WebChannelFactory<IPCSService> channelFactory = new WebChannelFactory<IPCSService>(new Uri("https://c.pcs.baidu.com"));
-            //channelFactory.Endpoint.EndpointBehaviors.Add(new CookieBehavior("BDUSS=" + BDUSS));
-            //((WebHttpBinding)channelFactory.Endpoint.Binding).ContentTypeMapper = new JsonContentTypeMapper();
-            
-            //IPCSService service = channelFactory.CreateChannel();
-            //PCSUploadResponse rtn = service.UploadFile(stream);
-            //return rtn;
         }
 
         public PanCreateResponse CreateFile(string path, long size, string md5)
         {
-            WebChannelFactory<IPanService> channelFactory = new WebChannelFactory<IPanService>(new Uri("http://pan.baidu.com"));
-            channelFactory.Endpoint.EndpointBehaviors.Add(new CookieBehavior("BDUSS=" + BDUSS));
-            ((WebHttpBinding)channelFactory.Endpoint.Binding).ContentTypeMapper = new JsonContentTypeMapper();
+            KeyValuePairList<string, string> parameters = new KeyValuePairList<string, string>(){
+                { "path", path },
+                { "isdir", "0" },
+                { "size", size.ToString() },
+                { "block_list", "[\"" + md5 + "\"]" }
+            };
 
-            IPanService service = channelFactory.CreateChannel();
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("path", path);
-            parameters.Add("isdir", "0");
-            parameters.Add("size", size.ToString());
-            parameters.Add("block_list", "[\"" + md5 + "\"]");
-            MemoryStream outStream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(outStream);
-            StringWriter sw = new StringWriter();
-            bool firstFlag = true;
-            foreach (string key in parameters.Keys)
-            {
-                if (firstFlag)
-                {
-                    firstFlag = false;
-                }
-                else
-                {
-                    sw.Write("&");
-                }
-                string value = parameters[key];
-                sw.Write(key);
-                sw.Write("=");
-                sw.Write(value);
-            }
-            string text = sw.ToString();
-            writer.WriteLine(text);
-            writer.Flush();
-
-            outStream.Seek(0, SeekOrigin.Begin);
-            PanCreateResponse rtn = service.CreateFile(outStream, BDSToken);
-            return rtn;
+            PanCreateResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/api/create?a=commit&channel=chunlei&clienttype=0&web=1"),
+                HttpMethod.POST,
+                new List<IHttpRequestModifier>(){
+                    new HttpRequestSimpleUriModifier("bdstoken", BDSToken),
+                    new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS),
+                    new HttpRequestUrlEncodedFormModifier(parameters)
+                },
+                new HttpResponseJSONObjectParser<PanCreateResponse>(),
+                null);
+            return result;
         }
     }
 }
