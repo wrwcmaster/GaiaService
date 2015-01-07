@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 namespace BaiduOfflineDownloader.Agent.Model
 {
     [DataContract]
-    public class PCSUploadResponse
+    public class PanOfflineDownloadResponse
     {
-        [DataMember(Name = "md5")]
-        public string MD5 { get; set; }
+        [DataMember(Name = "task_id")]
+        public string TaskId { get; set; }
         [DataMember(Name = "request_id")]
         public string RequestId { get; set; }
+        [DataMember(Name = "rapid_download")]
+        public int RapidDownload { get; set; }
     }
 }

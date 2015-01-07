@@ -49,20 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agent\BaiduPanAgent.cs" />
-    <Compile Include="Agent\ServiceDefinition\IPanService.cs" />
-    <Compile Include="Agent\ServiceDefinition\IPCSService.cs" />
-    <Compile Include="Agent\ServiceDefinition\KnownTypeProvider.cs" />
-    <Compile Include="Agent\ServiceDefinition\PanCreateResponse .cs" />
-    <Compile Include="Agent\ServiceDefinition\PCSUploadResponse.cs" />
+    <Compile Include="Agent\Model\PanTorrentQueryResponse.cs" />
+    <Compile Include="Agent\Model\PanTaskQueryResponse.cs" />
+    <Compile Include="Agent\Model\PanCreateResponse .cs" />
+    <Compile Include="Agent\Model\PanOfflineDownloadResponse.cs" />
+    <Compile Include="Agent\Model\PCSUploadResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WCF\CookieBehavior.cs" />
-    <Compile Include="WCF\CookieMessageInspector.cs" />
-    <Compile Include="WCF\UrlEncodedFormMessageAttribute.cs" />
-    <Compile Include="WCF\FileMessageAttribute.cs" />
-    <Compile Include="WCF\UrlEncodedFormMessageFormatter.cs" />
-    <Compile Include="WCF\FileMessageFormatter.cs" />
-    <Compile Include="WCF\JSONContentTypeMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

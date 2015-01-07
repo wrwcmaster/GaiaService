@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaiduOfflineDownloader.Agent.ServiceDefinition
+namespace BaiduOfflineDownloader.Agent.Model
 {
     [DataContract]
     public class PanCreateResponse
