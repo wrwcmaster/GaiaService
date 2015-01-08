@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agent\BaiduPanAgent.cs" />
+    <Compile Include="Agent\Model\PanSearchResponse.cs" />
     <Compile Include="Agent\Model\PanTorrentQueryResponse.cs" />
     <Compile Include="Agent\Model\PanTaskQueryResponse.cs" />
     <Compile Include="Agent\Model\PanCreateResponse .cs" />

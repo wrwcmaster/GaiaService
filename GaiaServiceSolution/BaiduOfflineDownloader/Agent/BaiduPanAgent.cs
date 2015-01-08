@@ -141,5 +141,21 @@ namespace BaiduOfflineDownloader.Agent
                 null);
             return result;
         }
+
+        public PanSearchResponse Search(string keyword, int page, int num)
+        {
+            PanSearchResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/api/search?order=time&desc=1&showempty=0&recursion=1&app_id=250528"),
+                HttpMethod.GET,
+                new List<IHttpRequestModifier>(){
+                    new HttpRequestSimpleUriModifier("bdstoken", BDSToken),
+                    new HttpRequestSimpleUriModifier("key", keyword),
+                    new HttpRequestSimpleUriModifier("page", page.ToString()),
+                    new HttpRequestSimpleUriModifier("num", num.ToString()),
+                    new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS)
+                },
+                new HttpResponseJSONObjectParser<PanSearchResponse>(),
+                null);
+            return result;
+        }
     }
 }
