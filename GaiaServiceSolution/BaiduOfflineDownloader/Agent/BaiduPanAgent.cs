@@ -84,23 +84,38 @@ namespace BaiduOfflineDownloader.Agent
             return result;
         }
 
-        public PanTaskQueryResponse QueryOfflineTasks(int start, int limit)
+        public PanSearchResponse Search(string keyword, int page, int num)
         {
-            return QueryOfflineTasks(start, limit, 255);
-        }
-
-        public PanTaskQueryResponse QueryOfflineTasks(int start, int limit, int statusFlag)
-        {
-            PanTaskQueryResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/rest/2.0/services/cloud_dl?method=list_task&need_task_info=1&app_id=250528"),
+            PanSearchResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/api/search?order=time&desc=1&showempty=0&recursion=1&app_id=250528"),
                 HttpMethod.GET,
                 new List<IHttpRequestModifier>(){
                     new HttpRequestSimpleUriModifier("bdstoken", BDSToken),
-                    new HttpRequestSimpleUriModifier("start", start.ToString()),
-                    new HttpRequestSimpleUriModifier("limit", limit.ToString()),
-                    new HttpRequestSimpleUriModifier("status", statusFlag.ToString()),
+                    new HttpRequestSimpleUriModifier("key", keyword),
+                    new HttpRequestSimpleUriModifier("page", page.ToString()),
+                    new HttpRequestSimpleUriModifier("num", num.ToString()),
                     new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS)
                 },
-                new HttpResponseJSONObjectParser<PanTaskQueryResponse>(),
+                new HttpResponseJSONObjectParser<PanSearchResponse>(),
+                null);
+            return result;
+        }
+
+        public PanShareResponse Share(long fileId)
+        {
+            KeyValuePairList<string, string> parameters = new KeyValuePairList<string, string>(){
+                { "fid_list", "[" + fileId + "]" },
+                { "schannel", "0" },
+                { "channel_list", "[]" }
+            };
+
+            PanShareResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/share/set?app_id=250528"),
+                HttpMethod.POST,
+                new List<IHttpRequestModifier>(){
+                    new HttpRequestSimpleUriModifier("bdstoken", BDSToken),
+                    new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS),
+                    new HttpRequestUrlEncodedFormModifier(parameters)
+                },
+                new HttpResponseJSONObjectParser<PanShareResponse>(),
                 null);
             return result;
         }
@@ -142,18 +157,23 @@ namespace BaiduOfflineDownloader.Agent
             return result;
         }
 
-        public PanSearchResponse Search(string keyword, int page, int num)
+        public PanTaskQueryResponse QueryOfflineTasks(int start, int limit)
         {
-            PanSearchResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/api/search?order=time&desc=1&showempty=0&recursion=1&app_id=250528"),
+            return QueryOfflineTasks(start, limit, 255);
+        }
+
+        public PanTaskQueryResponse QueryOfflineTasks(int start, int limit, int statusFlag)
+        {
+            PanTaskQueryResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/rest/2.0/services/cloud_dl?method=list_task&need_task_info=1&app_id=250528"),
                 HttpMethod.GET,
                 new List<IHttpRequestModifier>(){
                     new HttpRequestSimpleUriModifier("bdstoken", BDSToken),
-                    new HttpRequestSimpleUriModifier("key", keyword),
-                    new HttpRequestSimpleUriModifier("page", page.ToString()),
-                    new HttpRequestSimpleUriModifier("num", num.ToString()),
+                    new HttpRequestSimpleUriModifier("start", start.ToString()),
+                    new HttpRequestSimpleUriModifier("limit", limit.ToString()),
+                    new HttpRequestSimpleUriModifier("status", statusFlag.ToString()),
                     new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS)
                 },
-                new HttpResponseJSONObjectParser<PanSearchResponse>(),
+                new HttpResponseJSONObjectParser<PanTaskQueryResponse>(),
                 null);
             return result;
         }

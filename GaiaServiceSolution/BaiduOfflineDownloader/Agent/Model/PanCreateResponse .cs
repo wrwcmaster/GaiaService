@@ -23,7 +23,7 @@ namespace BaiduOfflineDownloader.Agent.Model
         [DataMember(Name = "size")]
         public long Size { get; set; }
         [DataMember(Name = "ctime")]
-        public long CreateTime { get; set; }
+        public long CreatedTime { get; set; }
         [DataMember(Name = "mtime")]
         public long ModifiedTime { get; set; }
         [DataMember(Name = "isdir")]

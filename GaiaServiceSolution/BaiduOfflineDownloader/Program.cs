@@ -18,18 +18,25 @@ namespace BaiduOfflineDownloader
             agent.RefreshToken();
             Console.WriteLine(agent.BDSToken);
             
-            //var fs = new System.IO.FileStream("test.torrent", System.IO.FileMode.Open);
-            //long size = fs.Length;
-            //var uploadResponse = agent.UploadTempFile(fs);
-            //Console.WriteLine(uploadResponse.MD5);
-            //var createResponse = agent.CreateCloudFile("/test.torrent", size, uploadResponse.MD5);
-            //Console.WriteLine(createResponse.Path);
-            //var torrentQueryResponse = agent.QueryTorrentInfo(createResponse.Path);
-            //Console.WriteLine(torrentQueryResponse.Info.SHA1);
-            //var offlineDownloadResponse = agent.OfflineDownload(createResponse.Path, torrentQueryResponse.Info.SHA1, "/", new int[] { 1 });
-
-            var searchResponse = agent.Search("[KTXP][Amagi Brilliant Park][SP01][GB][720P]", 1, 100);
+            var fs = new System.IO.FileStream("test.torrent", System.IO.FileMode.Open);
+            long size = fs.Length;
+            var uploadResponse = agent.UploadTempFile(fs);
+            Console.WriteLine(uploadResponse.MD5);
+           
+            var createResponse = agent.CreateCloudFile("/test.torrent", size, uploadResponse.MD5);
+            Console.WriteLine(createResponse.Path);
             
+            var torrentQueryResponse = agent.QueryTorrentInfo(createResponse.Path);
+            Console.WriteLine(torrentQueryResponse.Info.FileList[0].FileName);
+            var offlineDownloadResponse = agent.OfflineDownload(createResponse.Path, torrentQueryResponse.Info.SHA1, "/", new int[] { 1 });
+            Console.WriteLine(offlineDownloadResponse.TaskId);
+
+            var searchResponse = agent.Search(torrentQueryResponse.Info.FileList[0].FileName, 1, 100);
+            long fileId = searchResponse.Results[0].FileId;
+            Console.WriteLine(fileId);
+
+            var shareResult = agent.Share(fileId);
+            Console.WriteLine(shareResult.Link);
         }
     }
 }
