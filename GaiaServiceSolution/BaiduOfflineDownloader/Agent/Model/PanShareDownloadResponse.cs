@@ -8,23 +8,24 @@ using System.Threading.Tasks;
 namespace BaiduOfflineDownloader.Agent.Model
 {
     [DataContract]
-    public class PanSearchResponse
+    public class PanShareDownloadResponse
     {
-        public int HasMore { get; set; }
-        [DataMember(Name = "has_more")]
-        public int IsDir { get; set; }
+        [DataMember(Name = "server_time")]
+        public long ServerTime { get; set; }
         [DataMember(Name = "errno")]
         public int ErrorNumber { get; set; }
         [DataMember(Name = "request_id")]
         public string RequestId { get; set; }
         [DataMember(Name = "list")]
-        public List<SearchResult> ResultList { get; set; }
+        public List<FileInfo> FileList { get; set; }
 
         [DataContract]
-        public class SearchResult
+        public class FileInfo
         {
             [DataMember(Name = "fs_id")]
             public long FileId { get; set; }
+            [DataMember(Name = "dlink")]
+            public string DownloadLink { get; set; }
             [DataMember(Name = "path")]
             public string Path { get; set; }
             [DataMember(Name = "server_filename")]

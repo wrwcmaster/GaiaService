@@ -177,5 +177,35 @@ namespace BaiduOfflineDownloader.Agent
                 null);
             return result;
         }
+
+        public PanShareDownloadResponse GetDirectDownloadLink(string shareUrl)
+        {
+            WebClient client = new WebClient();
+            string content = UTF8Encoding.UTF8.GetString(client.DownloadData(shareUrl));
+            var sign = ExtractString(content, "yunData.SIGN = \"", "\";");
+            var uk = ExtractString(content, "yunData.SHARE_UK = \"", "\";");
+            var shareId = ExtractString(content, "yunData.SHARE_ID = \"", "\";");
+            var fileId = ExtractString(content, "\"fs_id\":", ",");
+            var timestamp = ExtractString(content, "yunData.TIMESTAMP = \"", "\";");
+            PanShareDownloadResponse result = HttpHelper.SendRequest(new Uri("http://pan.baidu.com/api/sharedownload?app_id=250528"),
+                HttpMethod.POST,
+                new List<IHttpRequestModifier>(){
+                    new HttpRequestSimpleUriModifier("timestamp", timestamp),
+                    new HttpRequestSimpleUriModifier("sign", sign),
+                    new HttpRequestUrlEncodedFormModifier(new KeyValuePairList<string, string>(){
+                        { "sign", sign },
+                        { "encrypt", "0" },
+                        { "product", "share" },
+                        { "uk", uk },
+                        { "primaryid", shareId },
+                        { "timestamp", timestamp },
+                        { "fid_list", "[" + fileId + "]" }
+                    }),
+                    new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS)
+                },
+                new HttpResponseJSONObjectParser<PanShareDownloadResponse>(),
+                null);
+            return result;
+        }
     }
 }
