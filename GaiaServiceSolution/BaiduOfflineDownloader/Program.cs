@@ -41,7 +41,15 @@ namespace BaiduOfflineDownloader
             var link = shareResponse.Link;
 
             var getDirectLinkResponse = agent.GetDirectDownloadLink(link);
-            Console.WriteLine(getDirectLinkResponse.FileList[0].DownloadLink);
+            var directLink = getDirectLinkResponse.FileList[0].DownloadLink;
+            Console.WriteLine(directLink);
+
+            var tempFileInfo = agent.Download(directLink);
+            if (File.Exists(tempFileInfo.PreferredName))
+            {
+                File.Delete(tempFileInfo.PreferredName);
+            }
+            File.Move(tempFileInfo.TempFilePath, tempFileInfo.PreferredName);
         }
     }
 }

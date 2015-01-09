@@ -207,5 +207,20 @@ namespace BaiduOfflineDownloader.Agent
                 null);
             return result;
         }
+
+
+        public HttpResponseFileParser.TempFileInfo Download(string fileUrl)
+        {
+            var result = HttpHelper.SendRequest(new Uri(fileUrl),
+                HttpMethod.GET,
+                new List<IHttpRequestModifier>(){
+                    new HttpRequestSimpleHeaderModifier("User-Agent", "netdisk;4.4.0.6;PC;PC-Windows;6.2.9200;WindowsBaiduYunGuanJia"),
+                    new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS),
+                    new HttpRequestSimpleHeaderModifier("Refer", "http://pan.baidu.com/disk/home")
+                },
+                new HttpResponseFileParser(),
+                null);
+            return result;
+        }
     }
 }
