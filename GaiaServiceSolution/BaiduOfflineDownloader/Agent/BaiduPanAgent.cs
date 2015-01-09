@@ -1,8 +1,8 @@
 ﻿using BaiduOfflineDownloader.Agent.Model;
-using Gaia.CommonLib;
-using Gaia.CommonLib.Net.Http;
-using Gaia.CommonLib.Net.Http.RequestModifier;
-using Gaia.CommonLib.Net.Http.ResponseParser;
+using Gaia.Common.Collections;
+using Gaia.Common.Net.Http;
+using Gaia.Common.Net.Http.RequestModifier;
+using Gaia.Common.Net.Http.ResponseParser;
 using System;
 using System.Collections.Generic;
 using System.IO;

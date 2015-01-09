@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gaia.CommonLib">
-      <HintPath>..\..\..\CommonLib\CommonLib\bin\Debug\Gaia.CommonLib.dll</HintPath>
+    <Reference Include="Gaia.Common">
+      <HintPath>..\..\..\CommonLib\CommonLib\bin\Debug\Gaia.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
