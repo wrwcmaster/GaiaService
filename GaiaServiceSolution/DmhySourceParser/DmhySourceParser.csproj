@@ -31,6 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Gaia.Plugin.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\CommonLib\Plugin\PluginManager\bin\Debug\Gaia.Plugin.Core.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdParty\HtmlAgilityPack\HtmlAgilityPack.dll</HintPath>
@@ -60,12 +64,6 @@
     <Compile Include="RawResource.cs" />
     <Compile Include="RawResourceProvider.cs" />
     <Compile Include="Service.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PluginCore\PluginCore.csproj">
-      <Project>{d6a58963-f72d-4e17-bc0b-241cc2923fb4}</Project>
-      <Name>PluginCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

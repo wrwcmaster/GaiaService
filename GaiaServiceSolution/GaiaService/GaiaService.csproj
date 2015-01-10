@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gaia.Plugin.Core">
+      <HintPath>..\..\..\CommonLib\Plugin\PluginManager\bin\Debug\Gaia.Plugin.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gaia.Plugin.Manager">
+      <HintPath>..\..\..\CommonLib\Plugin\PluginManager\bin\Debug\Gaia.Plugin.Manager.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -47,16 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PluginCore\PluginCore.csproj">
-      <Project>{d6a58963-f72d-4e17-bc0b-241cc2923fb4}</Project>
-      <Name>PluginCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PluginManager\PluginManager.csproj">
-      <Project>{24c94927-010a-4dd8-9c45-7daac02ab2ae}</Project>
-      <Name>PluginManager</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

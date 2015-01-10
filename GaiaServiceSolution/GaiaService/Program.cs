@@ -1,4 +1,4 @@
-﻿using PluginManager;
+﻿using Gaia.Plugin;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +21,7 @@ namespace GaiaService
     {
         static void Main(string[] args)
         {
-            PluginManager.PluginManager.Instance.PluginRegistered += PluginManager_PluginRegistered;
+            PluginManager.Instance.PluginRegistered += PluginManager_PluginRegistered;
             ServiceHost host = new ServiceHost(typeof(PluginManagerService), new Uri("net.tcp://localhost:8001/"));
             host.Open();
 
@@ -53,7 +53,7 @@ namespace GaiaService
                     }
                     else if (String.Equals(line, "list"))
                     {
-                        PluginManager.PluginManager.Instance.Plugins.ForEach((pluginInfo) =>
+                        PluginManager.Instance.Plugins.ForEach((pluginInfo) =>
                         {
                             Console.WriteLine(pluginInfo.Name);
                         });
@@ -61,7 +61,7 @@ namespace GaiaService
                 }
             }
 
-            PluginManager.PluginManager.Instance.StopPlugins();
+            PluginManager.Instance.StopPlugins();
             Console.WriteLine("Closing Host");
             host.Close();
         }
